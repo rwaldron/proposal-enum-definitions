@@ -26,5 +26,5 @@ Implementation Progress
 #### Render Spec
 
 ```
-ecmarkup spec/index.html index.html; git checkout gh-pages; git merge master; git push origin gh-pages; git checkout master;
+git checkout gh-pages; ecmarkup spec/index.html index.html; git add index.html; git commit -m "update spec"; git push origin gh-pages; git checkout master;
 ```
