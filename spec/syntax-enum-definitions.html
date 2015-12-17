@@ -1,0 +1,20 @@
+<emu-grammar>
+EnumDeclaration[Yield] :
+  `enum` BindingIdentifier[?Yield] `{` EnumElementList `}` #1
+
+EnumLexicalDeclaration[Yield] :
+  `enum` `{` EnumElementList `}` #1
+
+EnumExpression :
+  `enum` `{` EnumElementList `}` #1
+
+EnumElementList[Yield] :
+  EnumElement[?Yield] #1
+  EnumElementList[?Yield] EnumElement[?Yield] #2
+
+EnumElement[Yield] :
+  IdentifierName[?Yield] #1
+  IdentifierName[?Yield] Initializer[In, ?Yield] #2
+
+</emu-grammar>
+<!-- Q: Can EnumKey be replaced by IdentifierName? -->
