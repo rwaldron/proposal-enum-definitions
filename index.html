@@ -245,47 +245,54 @@ enum Days {
 
   Days = DefineEnumeration(<span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>), isQualified, names, values);
 }
-<span class="hljs-built_in">console</span>.log(Days.SUNDAY); <span class="hljs-comment">// Symbol(SUNDAY)</span>
-<span class="hljs-built_in">console</span>.log(Days.SATURDAY); <span class="hljs-comment">// Symbol(SATURDAY)</span>
+&lt;&lt;<span class="xml"><span class="hljs-tag">&lt;&lt;&lt;&lt;&lt; <span class="hljs-attr">HEAD</span>
+<span class="hljs-attr">console.log</span>(<span class="hljs-attr">Days.SUNDAY</span>); // <span class="hljs-attr">Symbol</span>(<span class="hljs-attr">SUNDAY</span>)
+<span class="hljs-attr">console.log</span>(<span class="hljs-attr">Days.SATURDAY</span>); // <span class="hljs-attr">Symbol</span>(<span class="hljs-attr">SATURDAY</span>)
 
 
+=<span class="hljs-string">======</span>
+<span class="hljs-attr">console.log</span>(<span class="hljs-attr">Days.SUNDAY</span>); // <span class="hljs-attr">0</span>
+<span class="hljs-attr">console.log</span>(<span class="hljs-attr">Days.SATURDAY</span>); // <span class="hljs-attr">6</span>
 
 
-<span class="hljs-comment">// enum declaration (containing an element with explicitly assigned value)</span>
+&gt;</span>&gt;&gt;&gt;&gt;&gt;&gt; master
+
+
+// enum declaration (containing an element with explicitly assigned value)
 enum Days {
   SUNDAY,
   MONDAY,
-  TUESDAY = <span class="hljs-number">0</span>,
+  TUESDAY = 0,
   WEDNESDAY,
   THURSDAY,
   FRIDAY,
   SATURDAY,
 }
 
-<span class="hljs-comment">// Desugars to:</span>
-<span class="hljs-keyword">let</span> Days;
+// Desugars to:
+let Days;
 {
-  Days = <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>);
-  <span class="hljs-keyword">let</span> isQualified = <span class="hljs-literal">true</span>;
-  <span class="hljs-keyword">let</span> names = [
-    <span class="hljs-string">"SUNDAY"</span>,
-    <span class="hljs-string">"MONDAY"</span>,
-    <span class="hljs-string">"TUESDAY"</span>,
-    <span class="hljs-string">"WEDNESDAY"</span>,
-    <span class="hljs-string">"THURSDAY"</span>,
-    <span class="hljs-string">"FRIDAY"</span>,
-    <span class="hljs-string">"SATURDAY"</span>,
+  Days = Object.create(null);
+  let isQualified = true;
+  let names = [
+    "SUNDAY",
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
   ];
-  <span class="hljs-keyword">let</span> values = {
-    TUESDAY: <span class="hljs-number">0</span>
+  let values = {
+    TUESDAY: 0
   };
 
-  Days = DefineEnumeration(<span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>), isQualified, names, values);
+  Days = DefineEnumeration(Object.create(null), isQualified, names, values);
 }
-<span class="hljs-built_in">console</span>.log(Days.SUNDAY); <span class="hljs-comment">// 0</span>
-<span class="hljs-built_in">console</span>.log(Days.TUESDAY); <span class="hljs-comment">// 0</span>
-<span class="hljs-built_in">console</span>.log(Days.SATURDAY); <span class="hljs-comment">// 6</span>
-</code></pre>
+console.log(Days.SUNDAY); // 0
+console.log(Days.TUESDAY); // 0
+console.log(Days.SATURDAY); // 6
+</span></code></pre>
 
 <pre><code class="javascript hljs">
 <span class="hljs-comment">// enum lexical declaration (containing an element with explicitly assigned value)</span>
