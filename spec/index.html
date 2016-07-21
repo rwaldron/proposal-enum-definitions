@@ -269,6 +269,26 @@ enum {
 }
 
 
+var LexicalEnvironment = global;
+DefineEnumeration(
+  LexicalEnvironment, false, [
+    "SUNDAY",
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
+    "FUNDAY",
+  ], {
+    FUNDAY: "IS NOT A REAL DAY",
+  }
+);
+
+console.log(SUNDAY); // 0
+console.log(FUNDAY); // "IS NOT A REAL DAY"
+
+
 </code></pre>
 
   </emu-clause>
