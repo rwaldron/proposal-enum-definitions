@@ -153,7 +153,7 @@ TODO: Determine common semantic intersection for illustrations below
 </p>
 
 <pre><code class="javascript hljs">
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">DefineEnumeration</span>(<span class="hljs-params">target, isQualified, names, values</span>) </span>{
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">DefineEnum</span>(<span class="hljs-params">target, isQualified, names, values</span>) </span>{
   <span class="hljs-keyword">let</span> configurable = <span class="hljs-literal">false</span>;
   <span class="hljs-keyword">let</span> writable = <span class="hljs-literal">false</span>;
   <span class="hljs-keyword">let</span> enumerable = <span class="hljs-literal">true</span>;
@@ -207,7 +207,7 @@ TODO: Determine common semantic intersection for illustrations below
   ];
   <span class="hljs-keyword">let</span> values = {};
 
-  DefineEnumeration(<span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>), isQualified, names, values);
+  DefineEnum(<span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>), isQualified, names, values);
 }
 
 <span class="hljs-built_in">console</span>.log(Days.SUNDAY); <span class="hljs-comment">// 0</span>
@@ -243,7 +243,7 @@ enum Days {
   ];
   <span class="hljs-keyword">let</span> values = {};
 
-  Days = DefineEnumeration(<span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>), isQualified, names, values);
+  Days = DefineEnum(<span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>), isQualified, names, values);
 }
 <span class="hljs-built_in">console</span>.log(Days.SUNDAY); <span class="hljs-comment">// 0</span>
 <span class="hljs-built_in">console</span>.log(Days.SATURDAY); <span class="hljs-comment">// 6</span>
@@ -280,7 +280,7 @@ enum Days {
     TUESDAY: <span class="hljs-number">0</span>
   };
 
-  Days = DefineEnumeration(<span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>), isQualified, names, values);
+  Days = DefineEnum(<span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>), isQualified, names, values);
 }
 <span class="hljs-built_in">console</span>.log(Days.SUNDAY); <span class="hljs-comment">// 0</span>
 <span class="hljs-built_in">console</span>.log(Days.TUESDAY); <span class="hljs-comment">// 0</span>
@@ -300,7 +300,7 @@ enum {
   FUNDAY = <span class="hljs-string">"IS NOT A REAL DAY"</span>,
 }
 
-DefineEnumeration(
+DefineEnum(
   LexicalEnvironment,
   <span class="hljs-literal">false</span>,
   [
