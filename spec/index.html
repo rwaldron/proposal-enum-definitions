@@ -121,24 +121,32 @@ TODO: Determine common semantic intersection for illustrations below
 </p>
 
 <pre><code class="javascript">
-function DefineEnumerationType(target, keys, values) {
-  let descriptors = {};
+function DefineEnumeration(target, isQualified, names, values) {
+  let configurable = false;
+  let writable = false;
+  let enumerable = true;
+  let descriptors = Object.create(null);
+  let k = 0;
 
-  for (let key of keys) {
-    let key = keys[k];
-    let hasKey = values.hasOwnProperty(key);
-    let value = hasKey ? values[key] : Symbol(key);
-    descriptors[key] = {
+  for (let name of names) {
+    let value = Reflect.has(values, name) ? values[name] : k;
+    let binding = isQualified ? name : Symbol(name);
+
+    descriptors[binding] = {
       value,
-      configurable: false,
-      writable: false,
-      enumerable: true,
+      configurable,
+      enumerable,
+      writable,
     };
+
+    k++;
   }
 
-  Object.defineProperties(target, descriptors);
+  Object.seal(Object.freeze(Object.defineProperties(target, descriptors)));
 }
 </code></pre>
+
+
 <pre><code class="javascript">
 // enum expression
 let Days = enum {
@@ -151,11 +159,12 @@ let Days = enum {
   SATURDAY,
 };
 
-// Desugars to:
+// approximately...
 let Days;
 {
   Days = Object.create(null);
-  let keys = [
+  let isQualified = true;
+  let names = [
     "SUNDAY",
     "MONDAY",
     "TUESDAY",
@@ -166,10 +175,11 @@ let Days;
   ];
   let values = {};
 
-  DefineEnumerationType(Days, keys, values);
+  DefineEnumeration(Object.create(null), isQualified, names, values);
 }
-console.log(Days.SUNDAY); // Symbol(SUNDAY)
-console.log(Days.SATURDAY); // Symbol(SATURDAY)
+
+console.log(Days.SUNDAY); // 0
+console.log(Days.SATURDAY); // 6
 </code></pre>
 
 
@@ -189,7 +199,8 @@ enum Days {
 let Days;
 {
   Days = Object.create(null);
-  let keys = [
+  let isQualified = true;
+  let names = [
     "SUNDAY",
     "MONDAY",
     "TUESDAY",
@@ -200,39 +211,14 @@ let Days;
   ];
   let values = {};
 
-  DefineEnumerationType(Days, keys, values);
+  Days = DefineEnumeration(Object.create(null), isQualified, names, values);
 }
 console.log(Days.SUNDAY); // Symbol(SUNDAY)
 console.log(Days.SATURDAY); // Symbol(SATURDAY)
-</code></pre>
 
 
-<pre><code class="javascript">
-// enum lexical declaration (containing an element with explicitly assigned value)
-enum {
-  SUNDAY,
-  MONDAY,
-  TUESDAY,
-  WEDNESDAY,
-  THURSDAY,
-  FRIDAY,
-  SATURDAY,
-  FUNDAY = "FUNDAY",
-}
-
-// Desugars to:
-const SUNDAY = Symbol("SUNDAY");
-const MONDAY = Symbol("MONDAY");
-const TUESDAY = Symbol("TUESDAY");
-const WEDNESDAY = Symbol("WEDNESDAY");
-const THURSDAY = Symbol("THURSDAY");
-const FRIDAY = Symbol("FRIDAY");
-const SATURDAY = Symbol("SATURDAY");
-const FUNDAY = "FUNDAY";
-</code></pre>
 
 
-<pre><code class="javascript">
 // enum declaration (containing an element with explicitly assigned value)
 enum Days {
   SUNDAY,
@@ -248,7 +234,8 @@ enum Days {
 let Days;
 {
   Days = Object.create(null);
-  let keys = [
+  let isQualified = true;
+  let names = [
     "SUNDAY",
     "MONDAY",
     "TUESDAY",
@@ -258,14 +245,30 @@ let Days;
     "SATURDAY",
   ];
   let values = {
-    TUESDAY: 0,
+    TUESDAY: 0
   };
 
-  DefineEnumerationType(Days, keys, values);
+  Days = DefineEnumeration(Object.create(null), isQualified, names, values);
 }
-console.log(env.SUNDAY); // Symbol(SUNDAY)
+console.log(Days.SUNDAY); // 0
 console.log(Days.TUESDAY); // 0
-console.log(env.SATURDAY); // Symbol(SATURDAY)
+console.log(Days.SATURDAY); // 6
+</code></pre>
+
+<pre><code class="javascript">
+// enum lexical declaration (containing an element with explicitly assigned value)
+enum {
+  SUNDAY,
+  MONDAY,
+  TUESDAY,
+  WEDNESDAY,
+  THURSDAY,
+  FRIDAY,
+  SATURDAY,
+  FUNDAY = "IS NOT A REAL DAY",
+}
+
+
 </code></pre>
 
   </emu-clause>
