@@ -121,7 +121,7 @@ TODO: Determine common semantic intersection for illustrations below
 </p>
 
 <pre><code class="javascript">
-function DefineEnumeration(target, isQualified, names, values) {
+function DefineEnum(target, isQualified, names, values) {
   let configurable = false;
   let writable = false;
   let enumerable = true;
@@ -175,7 +175,7 @@ let Days;
   ];
   let values = {};
 
-  DefineEnumeration(Object.create(null), isQualified, names, values);
+  DefineEnum(Object.create(null), isQualified, names, values);
 }
 
 console.log(Days.SUNDAY); // 0
@@ -211,7 +211,7 @@ let Days;
   ];
   let values = {};
 
-  Days = DefineEnumeration(Object.create(null), isQualified, names, values);
+  Days = DefineEnum(Object.create(null), isQualified, names, values);
 }
 console.log(Days.SUNDAY); // 0
 console.log(Days.SATURDAY); // 6
@@ -248,7 +248,7 @@ let Days;
     TUESDAY: 0
   };
 
-  Days = DefineEnumeration(Object.create(null), isQualified, names, values);
+  Days = DefineEnum(Object.create(null), isQualified, names, values);
 }
 console.log(Days.SUNDAY); // 0
 console.log(Days.TUESDAY); // 0
@@ -268,7 +268,7 @@ enum {
   FUNDAY = "IS NOT A REAL DAY",
 }
 
-DefineEnumeration(
+DefineEnum(
   LexicalEnvironment,
   false,
   [
