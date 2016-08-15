@@ -143,6 +143,8 @@ function DefineEnum(target, isQualified, names, values) {
   }
 
   Object.seal(Object.freeze(Object.defineProperties(target, descriptors)));
+  
+  return target;
 }
 </code></pre>
 
@@ -162,7 +164,6 @@ let Days = enum {
 // approximately...
 let Days;
 {
-  Days = Object.create(null);
   let isQualified = true;
   let names = [
     "SUNDAY",
@@ -175,7 +176,7 @@ let Days;
   ];
   let values = {};
 
-  DefineEnum(Object.create(null), isQualified, names, values);
+  Days = DefineEnum(Object.create(null), isQualified, names, values);
 }
 
 console.log(Days.SUNDAY); // 0
@@ -198,7 +199,6 @@ enum Days {
 // Desugars to:
 let Days;
 {
-  Days = Object.create(null);
   let isQualified = true;
   let names = [
     "SUNDAY",
@@ -233,7 +233,6 @@ enum Days {
 // Desugars to:
 let Days;
 {
-  Days = Object.create(null);
   let isQualified = true;
   let names = [
     "SUNDAY",
