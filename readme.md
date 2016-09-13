@@ -1,6 +1,6 @@
 # Enum Definitions
 
-[Specification](http://rwaldron.github.io/enum-definitions/)
+[Specification](http://rwaldron.github.io/proposal-enum-definitions/)
 
 ## Status
 
